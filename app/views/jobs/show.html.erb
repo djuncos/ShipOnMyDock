@@ -1,0 +1,70 @@
+ <% if flash[:boat] %>
+    <div class="boat_notice"><%= flash[:boat] %></div>
+  <% end %>
+
+
+<div class="job_param_heading heading_left heading">Description</div><div class="job_param"><%= @job.description %></div>
+<br>
+<div class="param_heading heading_left heading">Origin</div><div class="param_disp"><%= @job.origin %></div>
+<br>
+<div class="param_heading heading_left heading">Destination</div><div class="param_disp"><%= @job.destination %></div>
+<br>
+<div class="param_heading heading_left heading">Origin</div><div class="param_disp"><%= @job.cost %></div>
+<br>
+<div class="param_heading heading_left heading">Containers</div><div class="param_disp"><%= @job.containers %></div>
+<br>
+<div class="param_heading heading_left heading">Status</div><div class="param_disp"><div><%= @job.available? %>
+			</div>
+</div>
+<br>
+<!-- <div><% if @job.status == true %>
+	<%= "Assign boat(s)?" %>
+	
+	<% end %>
+</div> -->
+<br>
+<br>
+<br>
+<% if @job.status == true %>
+
+	<div class="avail_boat_name boat_heading boat_heading_left heading">Available Boats</div>
+	<div class="avail_boat_cont boat_heading heading">Available Containers</div>
+	<div class="avail_boat_cont3 boat_heading heading">Enter Number of Containers to Assign</div>
+	<div>
+		<% @boats.each do |boat| %>
+			<% if boat.avail_cont != 0  %>
+
+			<li>
+				<div class="avail_boat_name boat_next boat_param"><%= boat.name %></div>		
+				<div class="avail_boat_cont boat_param"> <%= boat.avail_cont %></div>
+
+				<div class="submit1">
+					<%= form_tag pairings_path do %>
+						<%= hidden_field_tag :boat_id, boat.id %>
+						<%= hidden_field_tag :job_id, @job.id %>
+
+						<%= hidden_field_tag :job_id, @job.id %>
+
+						<div class="submit"><%= text_field_tag :containers%></div>
+
+						<div class="submit"><%= submit_tag "Assign"%></div>
+ 
+				
+					<% end %>
+
+				</div>
+
+			</li>
+
+			<% end %>
+		<% end %>
+
+	</div>
+
+<% end %>
+
+<br>
+
+
+<br>
+<%= link_to 'Back',  jobs_path %>

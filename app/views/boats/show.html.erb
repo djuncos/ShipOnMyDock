@@ -1,0 +1,45 @@
+<% if flash[:boat] %>
+    <div class="boat_notice"><%= flash[:boat] %></div>
+  <% end %>
+
+<div class="boat_pic"><%= image_tag @boat.image.url(:large) %></div>
+<br>
+
+<div class="param_heading heading_left heading"><%= @boat.name %></div>
+
+
+<br>
+<br>
+<div class="param_heading heading_left heading">Total Containers</div><div class="param_disp"><%= @boat.total_cont %></div>
+<br>
+<div class="param_heading heading_left heading">Available Containers</div><div class="param_disp"><%= @boat.avail_cont %></div>
+<br>
+<br>
+
+<div class="param_heading heading_left heading">Assigned Jobs</div><div class="param_heading heading"">Containers Used</div>
+
+	
+		<% @pairing.each do |pairing| %>
+			<% if pairing.boat_id == @boat.id   %>
+
+			<li>
+				<div class="avail_boat_cont boat_param avail_boat_cont2"><%= pairing.job_id %></div>		
+				<div class="avail_boat_cont boat_param avail_boat_cont2"> <%= pairing.containers %></div>
+
+			</li>
+
+			<% end %>
+		<% end %>
+
+
+<br>
+
+
+
+
+<%= link_to 'Delete Boat', boat_path, method: :delete %>
+
+<%= link_to 'Update Boat', edit_boat_path %>
+
+<%= link_to 'Back',  root_path %>
+
